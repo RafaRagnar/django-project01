@@ -6,6 +6,9 @@ class Category(models.Model):
     """Class representing category"""
     name = models.CharField(max_length=65)
 
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model):
     """Class representing recipes"""
