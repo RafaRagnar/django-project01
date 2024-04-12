@@ -27,3 +27,7 @@ def recipe(request, id):
                   context={'recipe': recipe,
                            'is_detail_page': True,
                            })
+
+
+def search(request):
+    ...
