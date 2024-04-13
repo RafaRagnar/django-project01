@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404  # type: ignore
 from django.http.response import Http404
 from recipes.models import Recipe
-from django.db.models import Q
+from django.db.models import Q  # type: ignore
 
 
 def home(request):
@@ -38,8 +38,11 @@ def search(request):
 
     # TODO - Search for other research methods
     recipes = Recipe.objects.filter(
-        Q(title__icontains=search_term) | Q(
-            description__icontains=search_term),
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term),
+        ),
+        is_published=True
     ).order_by('-id')
 
     return render(request, 'recipes/pages/search.html', {
