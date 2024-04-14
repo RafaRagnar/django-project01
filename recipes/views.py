@@ -3,25 +3,14 @@ from django.http.response import Http404    # type: ignore
 from django.db.models import Q  # type: ignore
 from django.core.paginator import Paginator  # type: ignore
 from recipes.models import Recipe
-from utils.pagination import make_pagination_range
+from utils.pagination import make_pagination
 
 
 def home(request):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
 
-    try:
-        current_page = int(request.GET.get('page', 1))
-    except ValueError:
-        current_page = 1
+    page_obj, pagination_range = make_pagination(request, recipes, 9)
 
-    paginator = Paginator(recipes, 9)
-    page_obj = paginator.get_page(current_page)
-
-    pagination_range = make_pagination_range(
-        paginator.page_range,
-        4,
-        current_page
-    )
     return render(request, 'recipes/pages/home.html',
                   context={'recipes': page_obj,
                            'pagination_range': pagination_range,
@@ -32,8 +21,11 @@ def category(request, category_id):
     recipes = get_list_or_404(Recipe.objects.filter(category__id=category_id,
                               is_published=True).order_by('-id'))
 
+    page_obj, pagination_range = make_pagination(request, recipes, 9)
+
     return render(request, 'recipes/pages/category.html',
-                  context={'recipes': recipes,
+                  context={'recipes': page_obj,
+                           'pagination_range': pagination_range,
                            'title': f'{recipes[0].category.name}'
                            ' - Category | ',
                            })
@@ -63,8 +55,12 @@ def search(request):
         is_published=True
     ).order_by('-id')
 
+    page_obj, pagination_range = make_pagination(request, recipes, 9)
+
     return render(request, 'recipes/pages/search.html', {
         'page_title': f'Search for "{search_term}" |',
         'search_term': search_term,
-        'recipes': recipes,
+        'recipes': page_obj,
+        'pagination_range': pagination_range,
+        'addintional_url_query': f'&q={search_term}',
     })
