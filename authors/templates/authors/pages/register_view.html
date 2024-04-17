@@ -1,15 +1,15 @@
 {% extends 'global/base.html' %}
 
 
-{% block title %} Register | {% endblock title %}
+{% block title %} Register |{% endblock title %}
 
 
 {% block content %}
     <div class="main-content center container">
-        <h2>Register</h2>
+        <h2>Register {{ request.session.number }}</h2>
     </div>
     <div class="main-content container">
-        <form action="" method="POST">
+        <form action="{% url 'authors:create' %}" method="POST">
             {% csrf_token %}
             <div class="form-content form-content-grid">
                 {% for field in form %}
@@ -28,11 +28,15 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="form-group">
-                <button type="submit">
-                    Send
-                </button>
+            
+            <div class="form-content form-content-grid">
+                <div class="form-group">
+                    <button type="submit">
+                        Send
+                    </button>
+                </div>
             </div>
+            
         </form>            
     </div>
 {% endblock content %}
