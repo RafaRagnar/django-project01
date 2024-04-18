@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect   # type: ignore
 from django.http import Http404  # type: ignore
 from django.contrib import messages  # type: ignore
+from django.urls import reverse  # type: ignore
 from .forms import RegisterForm
 
 
@@ -9,6 +10,7 @@ def register_view(request):
     form = RegisterForm(register_form_data)
     return render(request, 'authors/pages/register_view.html', {
         'form': form,
+        'form_action': reverse('authors:create'),
     })
 
 
