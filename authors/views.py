@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect   # type: ignore
 from django.http import Http404  # type: ignore
 from django.contrib import messages  # type: ignore
 from django.urls import reverse  # type: ignore
-from django.contrib.auth import authenticate, login  # type: ignore
+from django.contrib.auth import authenticate, login, logout  # type: ignore
+from django.contrib.auth.decorators import login_required   # type: ignore
+
 from .forms import RegisterForm, LoginForm
 
 
@@ -29,6 +31,7 @@ def register_create(request):
         user.save()
         messages.success(request, 'Your user is created, please log in.')
         del (request.session['register_form_data'])
+        return redirect(reverse('authors:login'))
 
     return redirect('authors:register')
 
@@ -63,3 +66,16 @@ def login_create(request):
         messages.error(request, 'Invalid username or password.')
 
     return redirect(login_url)
+
+
+@login_required(login_url='author:login', redirect_field_name='next')
+def logout_view(request):
+    if not request.POST:
+        return redirect(reverse('authors:login'))
+
+    if request.POST.get('username') != request.user.username:
+        print('invalid user name', request.POST, request.user)
+        return redirect(reverse('authors:login'))
+
+    logout(request)
+    return redirect(reverse('authors:login'))
