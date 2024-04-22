@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect   # type: ignore
-from django.http import Http404  # type: ignore
-from django.contrib import messages  # type: ignore
-from django.urls import reverse  # type: ignore
-from django.contrib.auth import authenticate, login, logout  # type: ignore
-from django.contrib.auth.decorators import login_required   # type: ignore
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.shortcuts import redirect, render
+from django.urls import reverse
 
-from .forms import RegisterForm, LoginForm
+from .forms import LoginForm, RegisterForm
 
 
 def register_view(request):
@@ -30,6 +30,7 @@ def register_create(request):
         user.set_password(user.password)
         user.save()
         messages.success(request, 'Your user is created, please log in.')
+
         del (request.session['register_form_data'])
         return redirect(reverse('authors:login'))
 
@@ -49,7 +50,6 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    login_url = reverse('authors:login')
 
     if form.is_valid():
         authenticated_user = authenticate(
@@ -61,14 +61,14 @@ def login_create(request):
             messages.success(request, 'Your are logged in.')
             login(request, authenticated_user)
         else:
-            messages.error(request, 'Invalid credentials.')
+            messages.error(request, 'Invalid credentials')
     else:
-        messages.error(request, 'Invalid username or password.')
+        messages.error(request, 'Invalid username or password')
 
-    return redirect(login_url)
+    return redirect(reverse('authors:dashboard'))
 
 
-@login_required(login_url='author:login', redirect_field_name='next')
+@login_required(login_url='authors:login', redirect_field_name='next')
 def logout_view(request):
     if not request.POST:
         messages.error(request, 'Invalid logout request')
@@ -81,3 +81,8 @@ def logout_view(request):
     messages.success(request, 'Logged out successfully')
     logout(request)
     return redirect(reverse('authors:login'))
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard(request):
+    return render(request, 'authors/pages/dashboard.html')
