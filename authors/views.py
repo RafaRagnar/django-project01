@@ -74,7 +74,7 @@ def logout_view(request):
         return redirect(reverse('authors:login'))
 
     if request.POST.get('username') != request.user.username:
-        print('invalid user name', request.POST, request.user)
+        # print('invalid user name', request.POST, request.user)
         return redirect(reverse('authors:login'))
 
     logout(request)
