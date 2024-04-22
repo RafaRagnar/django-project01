@@ -76,7 +76,7 @@ class AuthorsLoginTest(AuthorsBaseTest):
         # User sees login form
         form = self.browser.find_element(By.CLASS_NAME, 'main-form')
 
-        # User tries to send values ​​with data that does not match
+        # User tries to send values with data that does not match
         username = self.get_by_placeholder(form, 'Type your username')
         password = self.get_by_placeholder(form, 'Type your password')
         username.send_keys('invalid_user')
