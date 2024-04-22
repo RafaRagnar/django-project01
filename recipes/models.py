@@ -1,5 +1,5 @@
-from django.db import models    # type: ignore
-from django.contrib.auth.models import User  # type: ignore
+from django.db import models
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
