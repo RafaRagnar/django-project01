@@ -335,7 +335,10 @@ h6 {
     color: var(--color-error-dark);
 }
 
-.form-content input {
+.form-content input,
+.form-content textarea,
+.form-content select
+ {
     width: 100%;
     padding: 1rem;
     border-radius: 0.4rem;
@@ -353,6 +356,10 @@ h6 {
     border: none;
     background: var(--color-primary-dark);
     color: var(--color-white);
+}
+
+.span-2 {
+    grid-column: span 2;
 }
 
 .plaintext-button {
@@ -442,6 +449,10 @@ h6 {
 
 .center {
     text-align: center;
+}
+
+.left {
+    text-align: left;
 }
 
 .m-x {

@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from recipes.models import Recipe
-from authors.forms.registe_form import AuthorRecipeForm
+from authors.forms.recipe_form import AuthorRecipeForm
 
 
 from .forms import LoginForm, RegisterForm
