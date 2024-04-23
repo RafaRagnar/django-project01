@@ -39,9 +39,15 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return reverse('recipes:recipe', args=(self.id,))
 
+    def generate_unique_slug(self):
+        slug = slugify(self.title)
+        count = 1
+        while Recipe.objects.filter(slug=slug).exists():
+            slug = slugify(self.title) + '-' + str(count)
+            count += 1
+        return slug
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f'{slugify(self.title)}'
-            self.slug = slug
-
+            self.slug = self.generate_unique_slug()
         return super().save(*args, **kwargs)
