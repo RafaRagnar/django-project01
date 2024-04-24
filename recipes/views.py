@@ -1,6 +1,5 @@
 import os
-from django.db.models.query import QuerySet
-from django.shortcuts import render, get_list_or_404, get_object_or_404  # type: ignore
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http.response import Http404
 from django.db.models import Q
 from django.views.generic import ListView
@@ -33,6 +32,10 @@ class RecipeListViewBase(ListView):
             {'recipes': page_obj, 'pagination_range': pagination_range}
         )
         return ctx
+
+
+class RecipeListViewHome(RecipeListViewBase):
+    template_name = 'recipes/pages/home.html'
 
 
 def home(request):
