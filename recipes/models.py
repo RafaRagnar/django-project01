@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 from django.urls import reverse
 from django.utils.text import slugify
 
@@ -12,8 +14,22 @@ class Category(models.Model):
         return self.name
 
 
+class RecipeManager(models.Manager):
+    def get_published(self):
+        return self.filter(
+            is_published=True
+        ).annotate(
+            author_full_name=Concat(
+                F('author__first_name'), Value(' '),
+                F('author__last_name'), Value(' ('),
+                F('author__username'), Value(')'),
+            )
+        ).order_by('-id')
+
+
 class Recipe(models.Model):
     """Class representing recipes"""
+    objects = RecipeManager()
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
     slug = models.SlugField(unique=True)
