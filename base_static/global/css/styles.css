@@ -478,3 +478,7 @@ a {
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
 }
+
+.hidden-text{
+    display: none;
+}
