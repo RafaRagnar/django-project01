@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.shortcuts import render
 from django.db.models.aggregates import Count
+from django.utils import translation
 from recipes.models import Recipe
 from utils.pagination import make_pagination
 from tag.models import Tag
@@ -50,8 +51,14 @@ class RecipeListViewBase(ListView):
         page_obj, pagination_range = make_pagination(
             self.request, ctx.get('recipes'), PER_PAGE
         )
+        html_language = translation.get_language()
+
         ctx.update(
-            {'recipes': page_obj, 'pagination_range': pagination_range}
+            {
+                'recipes': page_obj,
+                'pagination_range': pagination_range,
+                'html_language': html_language,
+            }
         )
         return ctx
 
