@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="recipe recipe-list-item">
     
     {% if recipe.cover %}
@@ -64,7 +66,7 @@
     <div class="recipe-meta-container">
         <div class="recipe-meta recipe-preparation">
             <h3 class="recipe-meta-title">
-                <i class="fas fa-stopwatch"></i> Preparo</h3>
+                <i class="fas fa-stopwatch"></i> {% translate "Preparation" %}</h3>
             <div class="recipe-meta-text">
                 {{ recipe.preparation_time }} 
                 {{ recipe.preparation_time_unit }}
@@ -72,7 +74,7 @@
         </div>
         <div class="recipe-meta recipe-servings">
             <h3 class="recipe-meta-title">
-                <i class="fas fa-pizza-slice"></i> Porções</h3>
+                <i class="fas fa-pizza-slice"></i> {% translate "Servings" %}</h3>
             <div class="recipe-meta-text">
                 {{ recipe.servings }}
                 {{ recipe.servings_unit }}
@@ -86,7 +88,7 @@
             <a class="recipe-read-more button button-dark button-full-width" 
             href="{% url 'recipes:recipe' recipe.id  %}">
                 <i class="fas fa-eye"></i>
-                <span>ver mais...</span>
+                <span> {% translate "read more" %}...</span>
             </a>
         </footer>
     {% endif %}
