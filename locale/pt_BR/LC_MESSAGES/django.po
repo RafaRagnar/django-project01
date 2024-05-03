@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-02 20:25-0300\n"
+"POT-Creation-Date: 2024-05-02 21:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,90 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\recipes\models.py:37
+msgid "Title"
+msgstr "Título"
+
+#: .\recipes\models.py:39
+msgid "description"
+msgstr "descrição"
+
+#: .\recipes\models.py:40
+msgid "slug"
+msgstr "slug"
+
+#: .\recipes\models.py:41
+#, fuzzy
+#| msgid "Preparation"
+msgid "preparation time"
+msgstr "Tempo de preparo"
+
+#: .\recipes\models.py:43
+#, fuzzy
+#| msgid "Preparation"
+msgid "preparation time unit"
+msgstr "Unidade de tempo da preparação"
+
+#: .\recipes\models.py:44
+#, fuzzy
+#| msgid "Servings"
+msgid "servings"
+msgstr "Porções"
+
+#: .\recipes\models.py:46
+#, fuzzy
+#| msgid "Servings"
+msgid "servings unit"
+msgstr "Unidade da porção"
+
+#: .\recipes\models.py:47
+#, fuzzy
+#| msgid "Preparation"
+msgid "preparation steps"
+msgstr "Modo de preparo"
+
+#: .\recipes\models.py:49
+msgid "preparation steps is html"
+msgstr "Modo de preparo é em HTML"
+
+#: .\recipes\models.py:51
+msgid "created at"
+msgstr "criado em"
+
+#: .\recipes\models.py:53
+msgid "update at"
+msgstr "atualizado em"
+
+#: .\recipes\models.py:55
+msgid "is published"
+msgstr "está publicado"
+
+#: .\recipes\models.py:57
+msgid "cover"
+msgstr "imagem"
+
+#: .\recipes\models.py:60
+#, fuzzy
+#| msgid "Category"
+msgid "category"
+msgstr "Categoria"
+
+#: .\recipes\models.py:63
+msgid "author"
+msgstr "autor"
+
+#: .\recipes\models.py:66
+msgid "tags"
+msgstr "tag"
+
+#: .\recipes\models.py:103
+msgid "Recipe"
+msgstr "Receita"
+
+#: .\recipes\models.py:104
+msgid "Recipes"
+msgstr "Receitas"
 
 #: .\recipes\templates\recipes\partials\recipe.html:69
 msgid "Preparation"
