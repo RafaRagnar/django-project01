@@ -106,13 +106,15 @@ class Recipe(models.Model):
         if not self.slug:
             self.slug = self.generate_unique_slug()
 
+        saved = super().save(*args, **kwargs)
+
         if self.cover:
             try:
-                self.resize_image(self.cover, 800)
+                self.resize_image(self.cover, 840)
             except FileNotFoundError:
                 ...
 
-        return super().save(*args, **kwargs)
+        return saved
 
     def clean(self, *args, **kwargs):
         error_messages = defaultdict(list)
